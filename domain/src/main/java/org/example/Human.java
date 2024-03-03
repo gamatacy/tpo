@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Setter
-public class Human {
+public class Human implements Moveable, Talkable {
 
     private String name;
     private Place currentPlace;
@@ -20,8 +19,34 @@ public class Human {
         this.brain = new ArrayList<>();
     }
 
-    public void addInformationToBrain(Information information) {
+    private void addInformationToBrain(Information information) {
         this.brain.add(information);
     }
 
+    @Override
+    public void walkTo(Place place) {
+        this.currentPlace = place;
+    }
+
+    @Override
+    public void slideTo(Place place) {
+        this.currentPlace = place;
+    }
+
+    @Override
+    public void talkTo(Human human, Information information) {
+        human.addInformationToBrain(information);
+    }
+
+    @Override
+    public void talkTo(Crowd crowd, Information information) {
+        for (Human human : crowd.getHumans()) {
+            human.addInformationToBrain(information);
+        }
+    }
+
+    @Override
+    public void talkTo(Information information) {
+        this.addInformationToBrain(information);
+    }
 }

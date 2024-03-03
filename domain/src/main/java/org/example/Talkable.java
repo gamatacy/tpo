@@ -2,9 +2,9 @@ package org.example;
 
 public interface Talkable {
 
-    void talkTo(Human human);
-    void talkTo(Crowd crowd);
+    void talkTo(Human human, Information information);
+    void talkTo(Crowd crowd, Information information);
 
-    void talkTo();
+    void talkTo(Information information);
 
 }
